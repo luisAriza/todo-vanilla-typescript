@@ -34,12 +34,16 @@ body {
   min-height: 100vh;
 }
 
-#task-form {
-  display: grid;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+input,
+textarea {
+  padding: 8px;
+  border-radius: 4px;
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #7a7a7a63;
 }
 
 button {
@@ -55,10 +59,6 @@ button {
 }
 button:hover {
   border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
