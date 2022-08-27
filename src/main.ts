@@ -1,3 +1,6 @@
+import { v4 } from "uuid"
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 import './style.css'
 
 const taskForm = document.querySelector<HTMLFormElement>("#task-form")!
@@ -5,7 +8,8 @@ const tasksList = document.querySelector<HTMLDivElement>("#tasks-list")!
 
 interface Task {
 	title: string,
-	description: string
+	description: string,
+	id: string
 }
 
 let tasks: Task[] = []
@@ -18,14 +22,17 @@ taskForm.addEventListener("submit", event => {
 
 	tasks.push({
 		title: title.value,
-		description: description.value
+		description: description.value,
+		id: v4()
 	})
 
 	localStorage.setItem("tasks", JSON.stringify(tasks))
+	Toastify({
+		text: "Task added",
+	}).showToast()
 
 	taskForm.reset()
 	title.focus()
-
 	renderTasks(tasks)
 })
 
@@ -50,6 +57,17 @@ function renderTasks(tasks: Task[]) {
 		title.textContent = task.title
 		description.textContent = task.description
 		btnDelete.textContent = "Del"
+		btnDelete.addEventListener("click", () => {
+			const index = tasks.findIndex(t => t.id === task.id)
+			tasks.splice(index, 1)
+
+			localStorage.setItem("tasks", JSON.stringify(tasks))
+			Toastify({
+				text: "Task deleted",
+				backgroundColor: "red"
+			}).showToast()
+			renderTasks(tasks)
+		})
 
 		header.append(title)
 		header.append(btnDelete)
