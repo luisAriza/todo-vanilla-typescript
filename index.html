@@ -7,7 +7,7 @@
     <title>To-Do con TypeScript</title>
   </head>
 
-  <body class="max-w-3xl p-6">
+  <body class="max-w-3xl">
     <div class="flex justify-center items-center gap-6 h-screen">
       <form
         id="task-form"
@@ -25,7 +25,10 @@
 
         <button>Save</button>
       </form>
-      <div id="task-list" class="bg-zinc-700 max-w-md w-full h-3/5 p-8"></div>
+      <div
+        id="tasks-list"
+        class="flex flex-col gap-2 max-w-md w-full h-4/5 p-4 overflow-y-scroll"
+      ></div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
